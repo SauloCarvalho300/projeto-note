@@ -1,0 +1,57 @@
+.container {
+  max-width: 72rem;
+  margin-inline: auto;
+  margin-block: 4rem;
+  padding: 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  & img {
+    width: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  & form {
+    width: 100%;
+
+    & input {
+      width: 100%;
+      background-color: transparent;
+      font-size: 1.875rem;
+      font-weight: 600;
+      letter-spacing: -0.015rem;
+      outline: 0;
+      border: 0;
+
+      &::placeholder {
+        color: #64748b;
+      }
+    }
+  }
+}
+
+.separator {
+  background-color: #334155;
+  height: 1px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  grid-auto-rows: 250px;
+}
+
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

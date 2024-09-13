@@ -3,13 +3,19 @@ import './styles.css'
 import { X } from 'lucide-react'
 import { useState } from 'react'
 
-export default function NoteCard() {
+interface NoteCardProps {
+  id: string
+  date: Date
+  content: string
+}
+
+export default function NoteCard({ id, content, date }: NoteCardProps) {
   const [open, setOpen] = useState(false)
   return (
     <div className='note-card'>
       <button onClick={() => setOpen(true)}>
-        <span>Há menos de um minuto</span>
-        <p>Texto de um exemplo  que criei para aparecer aqui</p>
+        <span>{date.toDateString()}</span>
+        <p>{content}</p>
 
         <div className='gradient-overlay' />
       </button>

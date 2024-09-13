@@ -3,18 +3,22 @@ import './styles.css'
 import { X } from 'lucide-react'
 import { useState } from 'react'
 
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR} from 'date-fns/locale'
+
 interface NoteCardProps {
   id: string
   date: Date
   content: string
+  handleDeleteNote(id: string): void
 }
 
-export default function NoteCard({ id, content, date }: NoteCardProps) {
+export default function NoteCard({ id, content, date, handleDeleteNote }: NoteCardProps) {
   const [open, setOpen] = useState(false)
   return (
     <div className='note-card'>
       <button onClick={() => setOpen(true)}>
-        <span>{date.toDateString()}</span>
+        <span>{formatDistanceToNow(date, { locale: ptBR, addSuffix: true })}</span>
         <p>{content}</p>
 
         <div className='gradient-overlay' />
@@ -35,12 +39,12 @@ export default function NoteCard({ id, content, date }: NoteCardProps) {
               </button>
               <form>
                 <div>
-                  <span>Adicionar nota</span>
+                  <span>{formatDistanceToNow(date, { locale: ptBR, addSuffix: true })}</span>
 
-                  <p>Texto de um exemplo  que criei para aparecer aqui</p>
+                  <p>{content}</p>
                 </div>
 
-                <button>
+                <button onClick={() => handleDeleteNote(id)}>
                   deseja <span>apagar essa nota?</span>
                 </button>
               </form>

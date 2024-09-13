@@ -23,6 +23,12 @@ export default function Home() {
     setNotes((prev) => [...prev, newNote])
   }
 
+  function handleDeleteNote(id: string) {
+    const newArray = notes.filter((note) => note.id !== id)
+
+    setNotes(newArray)
+  }
+
   return (
 
     <div className='container'>
@@ -46,6 +52,7 @@ export default function Home() {
           id={note.id}
           date={note.date}
           content={note.content}
+          handleDeleteNote={handleDeleteNote}
           />
         ))}
 

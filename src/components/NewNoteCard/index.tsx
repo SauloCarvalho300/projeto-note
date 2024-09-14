@@ -1,8 +1,10 @@
 import { FormEvent, useState, useRef } from 'react'
+import { toast } from 'sonner'
 
 import './styles.css'
 
 import { X } from 'lucide-react'
+import NoteCard from '../NoteCard'
 
 interface NewNoteCardProps {
   handleSaveNote(content: string): void
@@ -17,10 +19,15 @@ export default function NewNoteCard({ handleSaveNote }: NewNoteCardProps) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
 
+    if (!content) {
+      return toast.error('O conteúdo não pode estar vazio.')
+    }
+
     handleSaveNote(content)
 
     setContent('')
     textareaRef.current?.focus()
+    
   }
 
   return (

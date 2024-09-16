@@ -27,7 +27,6 @@ export default function NewNoteCard({ handleSaveNote }: NewNoteCardProps) {
 
     setContent('')
     textareaRef.current?.focus()
-    
   }
 
   return (

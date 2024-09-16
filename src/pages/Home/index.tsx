@@ -12,6 +12,8 @@ interface Note {
 }
 
 export default function Home() {
+  const [search, setSearch] = useState<string>('')
+
   const [notes, setNotes] = useState<Note[]>(() => {
     const notesOnStorage = localStorage.getItem('notes')
 
@@ -48,6 +50,10 @@ export default function Home() {
     toast.success('Nota deletada com sucesso.')
   }
 
+  const filteredNotes = search !== ''
+  ? notes.filter(note => note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+  : notes
+
   return (
 
     <div className='container'>
@@ -57,6 +63,8 @@ export default function Home() {
         <input
           type="text"
           placeholder='Busque em suas notas...'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </form>
 
@@ -65,7 +73,7 @@ export default function Home() {
       <div className='cards'>
         <NewNoteCard handleSaveNote={handleSaveNote} />
 
-        {notes.map((note) => (
+        {filteredNotes.map((note) => (
           <NoteCard
           key={note.id}
           id={note.id}
